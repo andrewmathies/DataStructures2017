@@ -1,0 +1,34 @@
+H343 Spring 2017 Homework 01 Andrew Mathies awmathie
+
+a.
+Θ(1)
+
+b.
+Θ(n)
+
+c.
+Θ(n^2)
+
+d.
+Θ(n^2)
+
+e.
+Θ(nlog(n))
+
+f.
+Θ(nlog(n))
+
+g.
+Θ(n^2(1 + log(n)))
+
+h.
+Θ(n^2)
+
+I solved Task A by creating a helper method to calculate the Hamming distance
+of two characters, and then used that in a loop to go through two "strings of
+dna" and find the total hamming distance. I solved Task C by going through 
+the list of methods for a single array example in the book, converting them to
+methods for 2D arrays, and then adding any I thought important. Then I wrote
+those out as an interface, and then implemented that as cleanly as I could.
+Then I made several test cases for my 2DArray methods to see if they worked
+as I expected them to.

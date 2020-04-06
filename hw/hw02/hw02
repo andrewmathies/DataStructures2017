@@ -1,0 +1,25 @@
+H343 / Spring 2017 Homework 2 Andrew Mathies awmathie
+
+1. Well there is no advantage to choosing the right subtree over the left
+subtree, it's just important to pick one side and be consistent. You can't
+do anything except for pick either left or right and always have equal 
+values on that sides subtree.
+
+2.			 15
+		      |      |
+		      5      20
+		       |    |  |
+		       7    18 25
+			   |
+			   16
+
+3. Pre-order - 15, 5, 7, 20, 18, 16, 25
+   In-order - 5, 7, 15, 16, 18, 20, 25
+   Post-order - 7, 5, 16, 18, 25, 20, 15
+
+4. Not always, but often the smallest element will be in the leaf that has
+the greatest depth of any node. This is because in a MaxHeap elements of
+small value will always be displayed below elements of higher value. So
+the smallest element will always be a leaf, but it will not always have the
+greatest depth, it might be a leaf halfway down the heap if it was placed
+fairly early in the process of building the heap.

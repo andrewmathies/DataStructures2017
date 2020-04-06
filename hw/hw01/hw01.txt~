@@ -1,0 +1,25 @@
+H343 Spring 2017 Homework 01 Andrew Mathies awmathie
+
+a.
+Θ(1)
+
+b.
+Θ(n)
+
+c.
+Θ(n^2)
+
+d.
+Θ(n^2)
+
+e.
+Θ(nlog(n))
+
+f.
+Θ(nlog(n))
+
+g.
+Θ(n^2(1 + log(n)))
+
+h.
+Θ(n^2)

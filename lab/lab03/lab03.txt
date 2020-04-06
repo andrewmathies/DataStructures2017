@@ -1,0 +1,11 @@
+// H343 / Spring 2017 Lab03 Andrew Mathies awmathie
+
+To make the card thing I just copied the interface from the course website
+and then added in a new method to draw a hand of cards. Then I made a new file
+to implement the interface, the only part that was a little tricky was making
+sure when I got a hand of cards that I never got duplicates and that the deck
+had the same amount of cards afterwards as before. I don't know if there is a
+better way to do that but I feel like there should be, it feels sloppy to just
+stick stuff in another list and then copy it over afterwards. For the tweet
+thing I just made a few examples and followed the instructions, it seemed
+pretty barebones so I don't have much to say about it.

@@ -1,0 +1,5 @@
+public interface CardSet {
+    public void initialize();
+    public String drawRandomCard();
+    public String drawHand(int size);
+}

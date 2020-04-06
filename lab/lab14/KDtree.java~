@@ -1,0 +1,203 @@
+// H343 Spring 2017
+//
+// KD tree with insert and exact match methods
+//
+// TODO for Lab 14:
+//   implement getNeighbors(Key[] key, int r)
+
+public class KDtree<Key extends Comparable<?super Key>, E> {
+    private BinNode<Key, E> root;
+    private int totalNode;
+    private BinNode<Key, E> curr;   // works with find()
+    private String enumStr;         // for enumeration
+    private int dim;   // dimension of the key
+    private int level; // which level; important for insertion & search
+    
+    // k-dimensional tree:
+    // at instantiation time,
+    // the parameter d specifies how many dimensions are stored in each key
+    // (stored in the instance variable dim)
+    public KDtree(int d) {
+        root = curr = null;
+        totalNode = 0;
+        dim = d;
+        level = 0;
+    }
+
+    public BinNode<Key, E> find (Key[] k) {
+        if (root == null) 
+	    return null;
+        else
+            return find (root, 0, k);
+    }
+
+    public BinNode<Key, E> find (BinNode<Key, E> entry, int thislevel, Key[] k) {
+        if (entry == null) 
+	    return null;
+        curr = entry;
+        level = thislevel; // update level
+        Key[] thiskey = entry.getKey();
+        if (thiskey[level % dim].compareTo(k[level % dim]) == 0) {
+            return curr;
+        } else {
+            if (entry.isLeaf()) return null;
+            Key[] key2 = entry.getKey();
+             // make sure that the "correct" component within the k-dimensional key is used:
+            if (k[level % dim].compareTo(key2[level % dim]) >= 0) {
+                return find (entry.getRight(), thislevel + 1, k); // note thislevel + 1
+            } else {
+                return find (entry.getLeft(), thislevel + 1, k);
+            }
+        }
+    }
+    public void insert(Key[] k, E v) {
+        BinNode<Key, E> node = new BinNode <Key, E>(k, v);
+        insert(node);
+        // insert(root, node);
+    }
+    public void insert(BinNode<Key, E> node) {
+        find (node.getKey());
+        if (curr == null) {
+            root = node;
+        } else {
+            Key[] key1 = node.getKey();
+            Key[] key2 = curr.getKey();
+            if (key1[level % dim].compareTo(key2[level % dim]) >= 0) {
+                if (curr.getRight() != null) node.setRight(curr.getRight());
+                curr.setRight(node);
+            } else {
+                if (curr.getLeft() != null) node.setLeft(curr.getLeft());
+                curr.setLeft(node);
+            }
+        }
+        totalNode ++;
+    }
+    public void preorder() {
+        enumStr = "";
+        System.out.println("Total node = " + totalNode);
+        if (root != null) preorder(root);
+        System.out.println("Preorder enumeration: " + enumStr);
+    }
+    private void preorder(BinNode<Key, E> node) {    
+        if (node != null) System.out.println("root node: " + node.toString());
+        if (node.getLeft() != null) System.out.println("   left node: " + node.getLeft().toString());
+        if (node.getRight() != null) System.out.println("   right node:" + node.getRight().toString());
+        
+        if (node != null) {
+            enumStr += node.toString();
+        }
+        if (node.getLeft() != null) preorder(node.getLeft());
+        if (node.getRight() != null) preorder(node.getRight());
+    }
+    
+    // ---------------------------------------------------------------------    
+    // TODO for lab14 - implement the following method:
+    // ---------------------------------------------------------------------
+    public void left(BinNode<Key, E> node) {
+	curr = root;
+	level = 0;
+	while (curr.getLeft().getKey()[level % dim].compareTo(node.getKey()[level % dim]) != 0) {
+	    curr = curr.getLeft();
+	    level++;
+	}
+    }
+   
+    public void right(BinNode<Key, E> node) {
+	curr = root;
+	level = 0;
+	while (curr.getRight().getKey()[level % dim].compareTo(node.getKey()[level % dim]) != 0) {
+	    curr = curr.getRight();
+	    level++;
+	}
+    }
+
+    public double distance(BinNode<Key, E> node1, BinNode<Key, E> node2) {
+	double out = 0;
+	for(int i = 0; i < dim; i++)
+	    out += pow((double) node1[i] - (double) node2[i], 2.0);
+	return Math.sqrt(out);
+    }
+
+    public void getNeighbors(Key[] key, int r) {
+        boolean down = true, left = false;
+	ArrayList<BinNode<Key, E>> neighbors = new ArrayList<BinNode<Key, E>>();
+	BinNode<Key, E> start = find(key), temp = null;
+	if (start.isLeaf())
+	    down = false;
+	curr = start;
+
+	while (distance(start, curr) < r) {
+	    if (start.getKey()[level % dim].compareTo(curr.getKey()[level & dim]) >= 0)
+		right(curr);
+	    else {
+		left(curr);
+		left = true;
+	    }
+	    neighbors.add(curr);
+	    temp = curr;
+	    while (distance(curr, start) < (double) r) {
+		if (left)
+		    curr = curr.getRight();
+		else
+		    curr = curr.getLeft();
+		neighbors.add(curr);
+	    }
+	    curr = temp;
+	    left = false;
+	}
+	
+	if (down) {
+	    curr = start;
+	    while (distance(curr, start) < (double) r) {
+		curr = curr.getLeft();
+		neighbors.add(curr);
+	    }
+	    curr = start;
+	    while (distance(curr, start) < (double) r) {
+		curr = curr.getRight();
+		neighbors.add(curr);
+	    }
+	}
+	for (BinNode<Key, E> x : neighbors)
+	    System.out.println(x);
+    }
+    // ---------------------------------------------------------------------
+
+    public static void main(String[] args) {
+        
+        KDtree <Integer, String> kdt = new KDtree<Integer, String>(2);
+        Integer[] dataA = {40, 45};
+        kdt.insert(dataA, "A");
+        Integer[] dataB = {15, 70};
+        kdt.insert(dataB, "B");
+        Integer[] dataC = {70, 10};
+        kdt.insert(dataC, "C");
+        Integer[] dataD = {69, 50};
+        kdt.insert(dataD, "D");
+        Integer[] dataE = {66, 85};
+        kdt.insert(dataE, "E");
+        Integer[] dataF = {85, 95};
+        kdt.insert(dataF, "F");
+        
+        kdt.preorder();
+
+        Integer[] dataG = {85, 93}; // G, close to F
+        System.out.println("Query location: " + dataG[0] + " " + dataG[1]);
+        BinNode<Integer, String> node = kdt.find (dataG); // exact match
+        if (node == null) {
+            System.out.println("...point not found.");
+        } else {
+            System.out.println("Point found at: " + node.toString());
+        }
+
+        // TODO for lab14:
+        // write at least 3 additional (different) examples
+        //   to test getNeighbors() on identical/close/not close points
+        
+        int r = 3;
+        kdt.getNeighbors(dataG, r); // get close neighbors
+
+        // TODO for lab14:
+        // instantiate and test a K-D tree with 3 dimensions        
+    }
+}

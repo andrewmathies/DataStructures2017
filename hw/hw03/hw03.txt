@@ -1,0 +1,53 @@
+H343 / Spring 2017 Homework 3 Andrew Mathies awmathie
+
+(A)
+
+a. I think a sorted array list would be the best implementation. Any of the
+   data structures other than the BST are fine for inserting, since our data
+   arrives already sorted, so really we just need the best data structure
+   for searching. Normally BST would be great for this, but it would be
+   extremely unbalanced since our data arrives sorted. I think the sorted
+   array list would be good for searching since we can do the thing
+   where we find the halfmark of the array, compare whether the element
+   we are searching for is greater or smaller, and then do the same thing
+   in the corresponding direction. It would be around O(logn) I think.
+
+b. I think an unsorted linked list or array list would be best. The inserts
+   take a constant time, and we only have 10 searches, which would take a
+   lot of time but there are only 10 of them.
+
+c. I think a BST would be best. Inserting takes Pheta(logn) which isn't
+   constant but also isn't awful, and the searches are really fast (also
+   Pheta(logn)) since our tree is pretty balanced. So total time is
+   2 * Pheta(nlogn).
+
+d. BST is definitely the best option, as all of the other data structures
+   aren't great at searching, and we have 1,000 times more searches than
+   inserts. Total time is Pheta(1,000 log(1,000)) + Pheta(log(1,000,000)).
+
+(B)
+
+Do you mean 2 bytes in the hint? Because it makes no sense to me how you
+could put 4 letters of information into 2 bits. Also, if what you say is
+true and you only need 2 bits for 4 letters, then the compression ratio
+is exactly one, which seems counterintuitive if we are trying to demonstrate
+the power of Huffman Encoding. Because I think there is a typo, from here
+on I am operating under the assumption that you meant 2 "bytes".
+
+A = 0    1  50
+T = 101  3  35
+C = 110  3  10
+G = 100  3  5
+
+uncompressed size = 16 bits *  100 = 1600 bits = 200 bytes
+compressed size = 100 / (1*50 + 3*35 + 3*10 + 3*5) = 200 bits = 25 bytes
+
+The compression ratio would be 8, as in you could fit the same information
+in 8 times less space if you use Huffman Encoding and previously it took
+2 bytes to store 4 letters.
+
+(C)
+I copied your code for the algorithm from the webpage, used the scanner
+to read a .txt file and the only thing I had to do after that was set
+up various arrays and print out the result, as well as make a min function
+for 3 integers.

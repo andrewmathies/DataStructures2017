@@ -1,0 +1,106 @@
+H343 / Spring 2017 HW 4 Andrew Mathies awmathie
+A.
+
+2. a.
+8, 1, 4, 1, 5, 9, 2, 6, 5
+
+1, 8, 4, 1, 5, 9, 2, 6, 5
+1, 4, 8, 1, 5, 9, 2, 6, 5
+1, 1, 4, 8, 5, 9, 2, 6, 5
+1, 1, 4, 5, 8, 9, 2, 6, 5
+1, 1, 4, 5, 8, 9, 2, 6, 5
+1, 1, 2, 4, 5, 8, 9, 6, 5
+1, 1, 2, 4, 5, 6, 8, 9, 5
+1, 1, 2, 4, 5, 5, 6, 8, 9
+
+b.
+8, 1, 4, 1, 5, 9, 2, 6, 5
+
+1, 8, 4, 1, 5, 9, 2, 6, 5
+1, 8, 1, 4, 5, 9, 2, 6, 5
+1, 1, 4, 8, 5, 9, 2, 6, 5
+1, 1, 4, 8, 5, 9, 2, 6, 5
+1, 1, 4, 8, 5, 9, 2, 6, 5
+1, 1, 4, 8, 2, 5, 6, 9, 5
+1, 1, 4, 8, 2, 5, 5, 6, 9
+1, 1, 2, 4, 5, 5, 6, 8, 9
+
+3. The sorting algorithm doesn't change the relative ordering of elements
+with identical values.
+
+4. a. Insertion sort is stable, because if it goes from the beginning of 
+the list to the end of the list and sees a value for the second time, it
+will swap the new duplicate element with the element immediately after the 
+old duplicate element.
+
+b. Bubble sort is stable, for similar reasons to insertion sort. The
+algorithm starts at the beginning and only ever swaps back towards the
+beginning so duplicate value elements would never be swapped behind the
+first occurence of the duplicate value.
+
+c. Mergesort is stable, because when comparing the first elements in two
+subsets of the list, if the two elements are duplicates it will place the
+first occurence of the duplicate element into the final list first.
+
+d. Heapsort is not stable, because when building the heap duplicates are not
+neccesarily placed below earlier occurences of the same value. Also when you
+start removing the max value element from the heap there is no guarantee that
+duplicate value elements in the heap will stay in there current orientation.
+
+B. 1. No, the algorithm would no longer be optimal if nickels were not US
+currency. If you were to use the greedy cashier's algorithm, there are some
+circumstances where you add a quarter to your output but increase the total
+number of coins by doing so. For example, if your desired amount of money is
+32 cents, and you add a quarter, you now need to come up with 7 cents. Because
+there are no nickels, you have to add seven more pennies, bringing your total
+number of coins to 8. If you did not add the quarter though, you could instead
+add three dimes and two pennies, which with 5 coins is better than the quarter
+route. This is because the quarter's total value is not divisble by 10, and
+sometimes that 5 extra cents on the quarter means you are going to have to
+add 5 more pennies.
+
+2. 
+I think this runs in O(N * 2^N), and I know there is a better solution that
+works in O(2^N), but I ran out of time.
+
+subsetSum(listOfInts, K) {
+boolean output = false;
+for (i : listOfInts)
+    output |= subsetHelper(listOfInts, K, i);
+
+return output;
+}
+
+subsetHelper(listOfInts, K, i) {
+if (i > listOfInts.length)
+   return false;
+if (listOfInts[i] == K)
+   return true;
+
+if (listOfInts[i] < K)
+   return subsetHelper(listofInts, K - listOfInts[i], i++);
+else
+   return subsetHelper(listOfInts, K, i++);
+}
+
+3. 
+
+subsetSum() {
+   boolean[] values = [listOfInts.length];   
+   values[0] = (listOfInts[0] == K);
+
+   for (int n = 1; n < listOfInts; n++) {
+       values[n] = 
+       values[n-1] ||
+       (listOfInts[n] == K) ||
+       subsetSumHelper(n-1, K - listOfInts[n]);
+   }
+   return values[listOfInts.length - 1];
+}
+
+boolean subsetSumHelper(int i, int ans) {
+if (there is a set of numbers in listofints from 0 - i = ans)
+return true;
+else
+return false;
+}

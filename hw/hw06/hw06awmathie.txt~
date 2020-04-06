@@ -1,0 +1,11 @@
+H343 / Spring 2017 HW06 Andrew Mathies awmathie
+
+9.13
+all 4 are technichally hash functions as they map a key to a value, however a 
+and b are pretty useless as a almost always maps to 0 and b always maps to 1. c
+and d are ok if you use probing
+
+9.14
+[1/7, 1/7, 9, 3, 2, 12, 5/7]
+
+3.

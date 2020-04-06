@@ -1,0 +1,30 @@
+H343 / Spring 2017 HW05 Andrew Mathies awmathie
+
+A.
+
+d. is best implemented by first sorting the list of numbers
+
+a. Run through the list, store a value that is the minimum number you have
+found, each time you go to a new element compare it to th value you are storing
+complexity - O(n)
+
+b. Same as a. but the value you are storing is the maximum number you have
+found, complexity - O(n)
+
+c. Run through the list summing all of the values of the elements of the list,
+divide that sum by the length of the list, which is either stored as a field
+for the list or computed while you run through the list, complexity - O(n)
+
+d. Sort the list (presumably with quicksort), go to the middle element, which
+is different depending on whether the length of the list is an 
+even or and odd number, complexity - O(nlogn)
+
+e. Create another list that has all of the same elements as the first list but
+with no duplicates, then run through the first list, incrementing the
+corresponding element in the second list, then after that run through the
+second list and whichever element has the highest number is the mode
+complexity - O(3n)
+
+B. 2. 
+They have to be similar in value for counting sort to be efficient. If k > n,
+time complexity is O(k), if n > k then the time complexity is O(n).

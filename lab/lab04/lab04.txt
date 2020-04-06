@@ -1,0 +1,32 @@
+H343 / Spring 2017 Lab 04 Andrew Mathies awmathie
+
+A.
+The results printed after I run PriorityQueueTest are:
+myStartArray: [ 1 10 5 3 4 7 6 9 8 ]
+myQueue1: [1, 3, 5, 8, 4, 7, 6, 10, 9]
+myQueue2: [1, 3, 5, 8, 4, 7, 6, 10, 9]
+myQueue3: [10, 9, 7, 8, 3, 5, 6, 1, 4]
+
+It looks like myQueue1 and 2 are minHeaps, aka sorted with the smallest element
+as the root of the heap, and myQueue3 is a maxHeap, aka sorted with the largest
+element as the root of the heap.
+
+B.
+Changes required to test MaxHeapTest.java:
+1. Changing the name of the class, constructor, and file
+2. Removing two subclasses in PriorityQueueTest
+3. Changing array of ints to array of Integers (wrapper class for int)
+4. Changing constructor calls to include new arguements of new constructor
+5. Changing print from a single call that references toString to a loop that goes
+through the heap
+6. Copying over the code provided
+7. Copying over the DSutil class
+
+C.
+This seems like a very simple method to implement, so I am kind of worried I am missing
+something very important. Since the heap is implemented using an array of sorted values,
+couldn't you just take k as an input for the method, lookup the kth value of the array,
+and then return that value? You don't have to shift anything in the heap or remove any
+elements from the heap to do this, it seems extremely simple. If the heap wasn't
+implemented using an array or by looking at a value in the array you deleted it the problem
+would be complicated but neither of those seem to be the case.
